@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:local="clr-namespace:EconomicRatesDemo"
+             x:Class="EconomicRatesDemo.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <Border Background="#e8ebe0" 
+        StrokeThickness="4"
+        StrokeShape="{OnPlatform Default= RoundRectangle 40, Android= RoundRectangle 35}"
+        Margin="{OnPlatform Default=30, Android= 10}">
+
+        <Grid RowDefinitions="80,*" ColumnDefinitions="*,*" BackgroundColor="Black">
+            <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                <Label Text="Exploring Global GNI per Capita with Income Thresholds" 
+                   TextColor="#e6e600"
+                   FontAttributes="Bold"
+                   FontSize="{OnPlatform Android=15, iOS= 15, Default= 20 }"
+                   Margin="{OnPlatform Default='35,10,0,0'}"/>
+                <Label Text="Gross National Income (GNI) is the total income earned by a country's people and businesses. Here, GNI values from 2000 to 2018 shared country-wise." 
+                   TextColor="White"
+                   FontSize="12"
+                   Margin="{OnPlatform Default='35,0,0,0'}"/>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout  Grid.Row="0" Grid.Column="1" HeightRequest="40" WidthRequest="350">
+                <BoxView HeightRequest="1" WidthRequest="20"
+                        BackgroundColor="#b1f48a"/>
+                <Label Text="Brazil" TextColor="White" Margin="{OnPlatform Default='2,9,0,0'}" />
+                <BoxView HeightRequest="1" WidthRequest="20"
+                         BackgroundColor="#f7a7a1" Margin="{OnPlatform Default='20,0,0,0'}"/>
+                <Label Text="China" TextColor="White"  Margin="{OnPlatform Default='2,9,0,0'}"/>
+                <BoxView HeightRequest="1" WidthRequest="20"
+                            BackgroundColor="#ffe799" Margin="{OnPlatform Default='20,0,0,0'}"/>
+                <Label Text="UK" TextColor="White"  Margin="{OnPlatform Default='2,9,0,0'}"/>
+                <BoxView HeightRequest="1" WidthRequest="20"
+                             BackgroundColor="#e6e6ff" Margin="{OnPlatform Default='20,0,0,0'}"/>
+                <Label Text="US" TextColor="White" Margin="{OnPlatform Default='2,9,0,0'}"/>
+            </HorizontalStackLayout>
+
+            <chart:SfCartesianChart PaletteBrushes="{Binding CustomBrushes}" Grid.Row="1" Grid.ColumnSpan="2">
+
+                <chart:SfCartesianChart.Resources>
+                    <!--BrazilGNI line series tooltip template-->
+                    <DataTemplate x:Key="tooltipTemplate1">
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*">
+                            <Label Grid.Row="0" Grid.Column="0"
+                               Text="Year : "
+					           TextColor="Black"
+					           FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Item.Year,StringFormat='{0:yyyy}'}"
+					           TextColor="Black"
+					           FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                               Text="Country : "
+					           TextColor="Black"
+					           FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                               Text="Brazil"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="2" Grid.Column="0" 
+                               Text="GNI : "
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding Item.BrazilGNI,StringFormat='${0}'}"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+
+                    <!--ChinaGNI line series tooltip template-->
+                    <DataTemplate x:Key="tooltipTemplate2">
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*">
+                            <Label Grid.Row="0" Grid.Column="0"
+                               Text="Year :"
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Item.Year,StringFormat='{0:yyyy}'}"
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                               Text="Country : "
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                               Text="China"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" 
+                               Text="GNI : "
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding Item.ChinaGNI,StringFormat='${0}'}"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+
+                    <!--UKGNI line series tooltip template-->
+                    <DataTemplate x:Key="tooltipTemplate3">
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*">
+                            <Label Grid.Row="0" Grid.Column="0"
+                               Text="Year :"
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Item.Year,StringFormat='{0:yyyy}'}"
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                               Text="Country : "
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                               Text="UK"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"/>
+                            <Label Grid.Row="2" Grid.Column="0" 
+                               Text="GNI : "
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding Item.UKGNI,StringFormat='${0}'}"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                    <!--USGNI line series tooltip template-->
+                    <DataTemplate x:Key="tooltipTemplate4">
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*">
+                            <Label Grid.Row="0" Grid.Column="0"
+                               Text="Year :"
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Item.Year,StringFormat='{0:yyyy}'}"
+			                   TextColor="Black"
+			                   FontSize="12"/>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                               Text="Country : "
+			                   TextColor="Black"
+			                   FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1"
+                               Text="US"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"/>
+                            <Label Grid.Row="2" Grid.Column="0" 
+                               Text="GNI :"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding Item.USGNI,StringFormat='${0}'}"
+                               TextColor="Black"
+                               FontSize="12"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </chart:SfCartesianChart.Resources>
+
+                <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis ShowMajorGridLines="False" PlotOffsetStart="7" PlotOffsetEnd="20">
+                        <chart:DateTimeAxis.Title>
+                            <chart:ChartAxisTitle Text="Years" TextColor="White"/>
+                        </chart:DateTimeAxis.Title>
+                        <chart:DateTimeAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle TextColor="White"/>
+                        </chart:DateTimeAxis.LabelStyle>
+                    </chart:DateTimeAxis>
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis EdgeLabelsDrawingMode="Fit" ShowMajorGridLines="False" PlotOffsetStart="{OnPlatform Android=5}" >
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="GNI per capita, Atlas (in dollar)" TextColor="White"/>
+                        </chart:NumericalAxis.Title>
+                        <chart:NumericalAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle TextColor="White"/>
+                        </chart:NumericalAxis.LabelStyle>
+                        <!--Lower GNI plot band-->
+                        <chart:NumericalAxis.PlotBands>
+                            <chart:NumericalPlotBandCollection>
+                                <chart:NumericalPlotBand Start="0" End="5000" 
+                                                     Fill="#3d5c5c"
+                                                     Text="Lower">
+                                    <chart:NumericalPlotBand.LabelStyle>
+                                        <chart:ChartPlotBandLabelStyle TextColor="White"/>
+                                    </chart:NumericalPlotBand.LabelStyle>
+                                </chart:NumericalPlotBand>
+                                <!--Middle GNI plot band-->
+                                <chart:NumericalPlotBand Start="30000" End="35000" 
+                                                     Fill="#3d5c5c"
+                                                     Text="Middle">
+                                    <chart:NumericalPlotBand.LabelStyle>
+                                        <chart:ChartPlotBandLabelStyle TextColor="White"/>
+                                    </chart:NumericalPlotBand.LabelStyle>
+                                </chart:NumericalPlotBand>
+                                <!--Higher GNI plot band-->
+                                <chart:NumericalPlotBand Start="58500" End="63500" 
+                                                     Fill="#3d5c5c"
+                                                     Text="Higher">
+                                    <chart:NumericalPlotBand.LabelStyle>
+                                        <chart:ChartPlotBandLabelStyle TextColor="White"/>
+                                    </chart:NumericalPlotBand.LabelStyle>
+                                </chart:NumericalPlotBand>
+                            </chart:NumericalPlotBandCollection>
+                        </chart:NumericalAxis.PlotBands>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+                
+                <chart:SfCartesianChart.TooltipBehavior>
+                    <chart:ChartTooltipBehavior Background="White"/>
+                </chart:SfCartesianChart.TooltipBehavior>
+
+                <chart:LineSeries ItemsSource="{Binding EconomicRate}"
+                              XBindingPath="Year" 
+                              YBindingPath="BrazilGNI"
+                              ShowMarkers="True"
+                              EnableTooltip="True"
+                              TooltipTemplate="{StaticResource tooltipTemplate1}">
+                    <chart:LineSeries.MarkerSettings>
+                        <chart:ChartMarkerSettings Type="Circle" Height="8" Width="8" />
+                    </chart:LineSeries.MarkerSettings>
+                </chart:LineSeries>
+
+                <chart:LineSeries ItemsSource="{Binding EconomicRate}"
+                              XBindingPath="Year" 
+                              YBindingPath="ChinaGNI"
+                              ShowMarkers="True"
+                              EnableTooltip="True"
+                              TooltipTemplate="{StaticResource tooltipTemplate2}">
+                    <chart:LineSeries.MarkerSettings>
+                        <chart:ChartMarkerSettings Type="Triangle" Height="8" Width="8"/>
+                    </chart:LineSeries.MarkerSettings>
+                </chart:LineSeries>
+
+                <chart:LineSeries ItemsSource="{Binding EconomicRate}"
+                              XBindingPath="Year" 
+                              YBindingPath="UKGNI"
+                              ShowMarkers="True"
+                              EnableTooltip="True"
+                              TooltipTemplate="{StaticResource tooltipTemplate3}">
+                    <chart:LineSeries.MarkerSettings>
+                        <chart:ChartMarkerSettings Type="Hexagon" Height="8" Width="8"/>
+                    </chart:LineSeries.MarkerSettings>
+                </chart:LineSeries>
+
+                <chart:LineSeries ItemsSource="{Binding EconomicRate}"
+                              XBindingPath="Year" 
+                              YBindingPath="USGNI"
+                              ShowMarkers="True"
+                              EnableTooltip="True"
+                              TooltipTemplate="{StaticResource tooltipTemplate4}">
+                    <chart:LineSeries.MarkerSettings>
+                        <chart:ChartMarkerSettings Type="Plus"/>
+                    </chart:LineSeries.MarkerSettings>
+                </chart:LineSeries>
+
+            </chart:SfCartesianChart>
+        </Grid>
+    </Border>
+</ContentPage>
