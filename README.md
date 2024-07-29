@@ -12,4 +12,4 @@ If you encounter a path too long exception when building this example project, c
 
 ![LineChartWithPlotBand](https://github.com/SyncfusionExamples/Creating--a-line-chart-with-plot-bands-to-explore-global-GNI-per-capita-with-income-thresholds/assets/102796134/de4de06b-aad5-40cf-91a3-9381bbf640d6)
 
-If you'd like more information or a detailed guide, refer [Creating a line chart with plot bands to explore global GNI per capita with income thresholds blog]().
+If you'd like more information or a detailed guide, refer [Creating a line chart with plot bands to explore global GNI per capita with income thresholds blog](https://www.syncfusion.com/blogs/post/dotnet-maui-line-chart-gni-per-capita-plot-bands).
